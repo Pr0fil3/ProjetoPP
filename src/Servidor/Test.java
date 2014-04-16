@@ -7,9 +7,9 @@ import java.sql.*;
  */
 public class Test {
     public static void main(String[] args) {
-        Connection con;
-        Statement st;
-        ResultSet rs;
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
 
         String url = "jdbc:mysql://localhost:3306/projeto_pp";
         String user = "root";
@@ -30,18 +30,25 @@ public class Test {
                         System.out.print(rs.getString(i) + " | ");
                 }
             }
-
-            if (rs != null) {
-                rs.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-            if (con != null) {
-                con.close();
-            }
         } catch (Exception ex){
             System.out.println(ex);
+        }
+        finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            }
+            catch (Exception ex){
+                System.out.println(ex.toString());
+            }
+
         }
     }
 }
